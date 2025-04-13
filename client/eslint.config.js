@@ -30,6 +30,17 @@ export default tseslint.config(
         },
       ],
       'no-console': 'warn',
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: '@features',
+              message: 'Avoid direct imports from features. Use only allowed layers.',
+            },
+          ],
+        },
+      ],
     },
   },
 )
