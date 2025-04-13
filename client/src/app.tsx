@@ -1,7 +1,8 @@
 import 'normalize.css'
+import { Posts } from '@/features'
 
 function App() {
-  return <h1>Hi dev!</h1>
+  return <Posts />
 }
 
 export default App
