@@ -1,4 +1,4 @@
-import { CustomCard } from '@/shared/ui'
+import { CustomCard, Time } from '@/shared/ui'
 import { Post as PostType } from '@/entities/posts'
 import { User } from '@/entities/users'
 
@@ -8,7 +8,7 @@ export const Post = ({ caption, date, comments, likes, username }: PostProps) =>
   return (
     <CustomCard
       title={username}
-      titleDescription={date}
+      titleDescription={<Time date={date} />}
       content={caption}
       footer={
         <div className={'flex gap-2'}>
