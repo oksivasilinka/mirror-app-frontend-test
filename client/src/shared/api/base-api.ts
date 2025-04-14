@@ -5,5 +5,5 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: import.meta.env.VITE_BASE_URL }),
   endpoints: () => ({}),
   reducerPath: 'baseApi',
-  tagTypes: [PROVIDED_TAGS.posts],
+  tagTypes: [PROVIDED_TAGS.posts, PROVIDED_TAGS.settings],
 })
