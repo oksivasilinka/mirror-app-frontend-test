@@ -6,7 +6,11 @@ type SidebarProps = {
 
 export const Sidebar = ({ children }: SidebarProps) => {
   return (
-    <div className={'h-screen w-full max-w-[300px] bg-secondary-foreground p-4 flex flex-col'}>
+    <div
+      className={
+        'h-screen fixed top-0 bottom-0 w-full max-w-[300px] bg-secondary-foreground p-4 flex flex-col'
+      }
+    >
       {children}
     </div>
   )

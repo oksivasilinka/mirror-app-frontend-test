@@ -7,9 +7,9 @@ type LayoutProps = {
 }
 export const Layout = ({ children, sidebar }: LayoutProps) => {
   return (
-    <div className={'h-full w-full flex max-w-screen'}>
+    <div className={'h-full flex max-h-screen w-full'}>
       <Sidebar>{sidebar}</Sidebar>
-      <div className={'p-4'}>{children}</div>
+      <div className={'p-4 ml-[300px] w-full overflow-auto'}>{children}</div>
     </div>
   )
 }
