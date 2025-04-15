@@ -18,7 +18,7 @@ export const CustomPagination = ({ pageSize = 1, currentPage, setPage }: CustomP
   const { pagination } = usePagination({ pageSize, currentPage })
 
   return (
-    <Pagination>
+    <Pagination className={'p-6'}>
       <PaginationContent>
         {pagination?.map((el, i) => {
           return (

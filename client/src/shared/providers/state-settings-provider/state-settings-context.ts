@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 import { LayoutTypes, NavigationTypes, Settings, TemplateTypes } from '@/entities/settings'
 
-type StateSettingsContextValues = {
+export type StateSettingsContextValues = {
   layout: LayoutTypes | undefined
   rows: number | undefined
   columns: number | undefined

@@ -7,9 +7,12 @@ import { Button } from '@/shared/ui'
 import { useEffect, useState } from 'react'
 import { Post as PostType } from '@/entities/posts'
 import { CustomPagination } from '@/shared/ui/custom-pagination'
+import { LayoutPosts } from '@/widgets/layout-posts/layout-posts.tsx'
+import { TOTAL_ELEMENTS } from '@/shared/constants'
+import { ClipLoader } from 'react-spinners'
 
 export const Posts = () => {
-  const { rows, columns, template, navigation } = useStateSettingsContext()
+  const { rows, columns, template, navigation, layout } = useStateSettingsContext()
   const [page, setPage] = useState(1)
 
   const limit = rows && columns && getLimitPosts(rows, columns)
@@ -33,19 +36,30 @@ export const Posts = () => {
     setPage((prev) => prev + 1)
   }
 
-  if (isFetching && page === 1) return null
-
+  if (isFetching && page === 1) {
+    return (
+      <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2'>
+        <ClipLoader />
+      </div>
+    )
+  }
   return (
     <>
-      {allPosts.map((post) => (
-        <Post
-          variant={template}
-          username={post?.user?.username ?? post.userId}
-          key={post.id}
-          {...post}
-        />
-      ))}
-      {navigation === NAVIGATION_VARIANTS.loadMore && (
+      <LayoutPosts
+        layout={layout}
+        rows={rows}
+        columns={columns}
+      >
+        {allPosts.map((post) => (
+          <Post
+            variant={template}
+            username={post?.user?.username ?? post.userId}
+            key={post.id}
+            {...post}
+          />
+        ))}
+      </LayoutPosts>
+      {navigation === NAVIGATION_VARIANTS.loadMore && allPosts.length < TOTAL_ELEMENTS && (
         <div className={'w-full flex justify-center p-6'}>
           <Button
             onClick={openMorePosts}
