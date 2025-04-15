@@ -6,6 +6,7 @@ import { NAVIGATION_VARIANTS } from '@/entities/settings'
 import { Button } from '@/shared/ui'
 import { useEffect, useState } from 'react'
 import { Post as PostType } from '@/entities/posts'
+import { CustomPagination } from '@/shared/ui/custom-pagination'
 
 export const Posts = () => {
   const { rows, columns, template, navigation } = useStateSettingsContext()
@@ -20,8 +21,11 @@ export const Posts = () => {
   const [allPosts, setAllPosts] = useState<PostType[]>([])
 
   useEffect(() => {
-    if (data) {
+    if (data && navigation === NAVIGATION_VARIANTS.loadMore) {
       setAllPosts((prevPosts) => [...prevPosts, ...data])
+    }
+    if (data && navigation !== NAVIGATION_VARIANTS.loadMore) {
+      setAllPosts([...data])
     }
   }, [data])
 
@@ -50,6 +54,13 @@ export const Posts = () => {
             Загрузить еще
           </Button>
         </div>
+      )}
+      {navigation === NAVIGATION_VARIANTS.pagination && (
+        <CustomPagination
+          currentPage={page}
+          pageSize={limit}
+          setPage={setPage}
+        />
       )}
     </>
   )
