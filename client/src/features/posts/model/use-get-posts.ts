@@ -8,7 +8,7 @@ import { ChildrenProps } from '@/shared/ui'
 
 type UseGetPostsArgs = ChildrenProps
 
-type UseGetPostsReturn = Omit<StateSettingsContextValues, 'setSettings'> & {
+type UseGetPostsReturn = Partial<Omit<StateSettingsContextValues, 'setSettings'>> & {
   isFetching?: boolean
   openMorePosts: () => void
   allPosts: PostType[]
