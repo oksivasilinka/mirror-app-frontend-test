@@ -24,16 +24,16 @@ export const Posts = () => {
   const [allPosts, setAllPosts] = useState<PostType[]>([])
 
   useEffect(() => {
-    if (data && navigation === NAVIGATION_VARIANTS.loadMore) {
-      setAllPosts((prevPosts) => [...prevPosts, ...data])
-    }
-    if (data && navigation !== NAVIGATION_VARIANTS.loadMore) {
+    if (data && page === 1) {
       setAllPosts([...data])
     }
   }, [data])
 
   const openMorePosts = () => {
-    setPage((prev) => prev + 1)
+    if (data) {
+      setPage((prev) => prev + 1)
+      setAllPosts((prev) => [...prev, ...data])
+    }
   }
 
   if (isFetching && page === 1) {
@@ -43,6 +43,7 @@ export const Posts = () => {
       </div>
     )
   }
+
   return (
     <>
       <LayoutPosts
