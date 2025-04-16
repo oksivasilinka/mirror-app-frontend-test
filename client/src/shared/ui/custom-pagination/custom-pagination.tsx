@@ -7,34 +7,34 @@ import {
 } from '@/shared/ui/pagination.tsx'
 import { usePagination } from '@/shared/hooks'
 import { DOTS } from '@/shared/constants'
+import { ChildrenProps, ConditionalRender } from '@/shared/ui'
 
 type CustomPaginationProps = {
-  currentPage: number
   pageSize?: number
-  setPage: (page: number) => void
-}
+} & ChildrenProps
 
-export const CustomPagination = ({ pageSize = 1, currentPage, setPage }: CustomPaginationProps) => {
-  const { pagination } = usePagination({ pageSize, currentPage })
+export const CustomPagination = ({ pageSize, page, setPage }: CustomPaginationProps) => {
+  const { pagination } = usePagination({ pageSize, currentPage: page })
 
   return (
     <Pagination className={'p-6'}>
       <PaginationContent>
-        {pagination?.map((el, i) => {
-          return (
-            <PaginationItem key={i}>
-              {el === DOTS && <PaginationEllipsis />}
-              {el !== DOTS && (
-                <PaginationLink
-                  onClick={() => setPage(el)}
-                  isActive={currentPage === el}
-                >
-                  {el}
-                </PaginationLink>
-              )}
-            </PaginationItem>
-          )
-        })}
+        {pagination?.map((el, i) => (
+          <PaginationItem key={i}>
+            <ConditionalRender condition={el === DOTS}>
+              <PaginationEllipsis />
+            </ConditionalRender>
+
+            {el !== DOTS && (
+              <PaginationLink
+                onClick={() => setPage(el)}
+                isActive={page === el}
+              >
+                {el}
+              </PaginationLink>
+            )}
+          </PaginationItem>
+        ))}
       </PaginationContent>
     </Pagination>
   )

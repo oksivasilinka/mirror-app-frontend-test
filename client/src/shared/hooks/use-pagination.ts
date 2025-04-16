@@ -3,7 +3,7 @@ import { DOTS, MAX_VISIBLE_PAGES, SIBLING_COUNT, TOTAL_ELEMENTS } from '@/shared
 
 type UsePaginationArgs = {
   currentPage: number
-  pageSize: number
+  pageSize?: number
 }
 
 type UsePaginationReturn = {
@@ -11,7 +11,7 @@ type UsePaginationReturn = {
 }
 
 export const usePagination = ({
-  pageSize,
+  pageSize = 1,
   currentPage,
 }: UsePaginationArgs): UsePaginationReturn => {
   const totalPages = Math.floor(TOTAL_ELEMENTS / pageSize)

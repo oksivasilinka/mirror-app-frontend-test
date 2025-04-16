@@ -22,13 +22,12 @@ export type LayoutTypes = (typeof LAYOUT_VARIANTS)[keyof typeof LAYOUT_VARIANTS]
 export type TemplateTypes = (typeof TEMPLATE_VARIANTS)[keyof typeof TEMPLATE_VARIANTS]
 export type NavigationTypes = (typeof NAVIGATION_VARIANTS)[keyof typeof NAVIGATION_VARIANTS]
 
+type Layout = Record<LayoutTypes, RowsAndColumns>
+
 export type Settings = {
   layout: {
     current: LayoutTypes
-    params: {
-      grid: RowsAndColumns
-      masonry: RowsAndColumns
-    }
+    params: Layout
   }
   template: TemplateTypes
   navigation: NavigationTypes
