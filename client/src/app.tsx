@@ -1,5 +1,5 @@
 import 'normalize.css'
-import { Posts } from '@/features'
+import { Posts } from '@/features/posts'
 import { Layout } from '@/shared/ui'
 import { SidebarSettings } from '@/widgets/sidebar-settings'
 import { StateSettingsProvider } from '@/shared/providers'
@@ -7,8 +7,8 @@ import { StateSettingsProvider } from '@/shared/providers'
 function App() {
   return (
     <StateSettingsProvider>
-      <Layout sidebar={<SidebarSettings />}>
-        <Posts />
+      <Layout sidebar={(setPage) => <SidebarSettings setPage={setPage} />}>
+        {(props) => <Posts {...props} />}
       </Layout>
     </StateSettingsProvider>
   )

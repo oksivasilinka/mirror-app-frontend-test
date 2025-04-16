@@ -9,6 +9,7 @@ import {
 import { ReactNode } from 'react'
 import { TEMPLATE_VARIANTS, TemplateTypes } from '@/entities/settings'
 import { cn } from '@/shared/libs'
+import { ConditionalRender } from '@/shared/ui'
 
 type CustomCardProps = {
   title: string
@@ -27,14 +28,19 @@ export const CustomCard = ({
 }: CustomCardProps) => {
   return (
     <Card>
-      {variant === TEMPLATE_VARIANTS.hover && (
+      <ConditionalRender condition={variant === TEMPLATE_VARIANTS.hover}>
         <CardContent className={cn({ 'pt-6': variant === 'hover' })}>{content}</CardContent>
-      )}
+      </ConditionalRender>
+
       <CardHeader className={cn({ 'border-b-0 border-t-1 pb-0': variant === 'hover' })}>
         <CardTitle>{title}</CardTitle>
         <CardDescription>{titleDescription}</CardDescription>
       </CardHeader>
-      {variant === TEMPLATE_VARIANTS.classic && <CardContent>{content}</CardContent>}
+
+      <ConditionalRender condition={variant === TEMPLATE_VARIANTS.classic}>
+        <CardContent>{content}</CardContent>
+      </ConditionalRender>
+
       <CardFooter>{footer}</CardFooter>
     </Card>
   )
